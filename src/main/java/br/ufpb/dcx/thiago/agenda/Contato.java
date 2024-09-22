@@ -1,16 +1,17 @@
 package br.ufpb.dcx.thiago.agenda;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Contato {
+public class Contato implements Serializable {
     private String nome;
     private int diaAniversario;
     private int mesAniversario;
 
-    public Contato(String nome, int diaAniversario, int mesAniversario) {
+    public Contato(String nome, int dia, int mes) {
         this.nome = nome;
-        this.diaAniversario = diaAniversario;
-        this.mesAniversario = mesAniversario;
+        this.diaAniversario = dia;
+        this.mesAniversario = mes;
     }
 
     public int getMesAniversario() {
@@ -47,15 +48,17 @@ public class Contato {
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, diaAniversario, mesAniversario);
+        int result = Objects.hashCode(nome);
+        result = 31 * result + diaAniversario;
+        result = 31 * result + mesAniversario;
+        return result;
     }
 
     @Override
     public String toString() {
-        return "Contato{" +
-                "nome='" + nome + '\'' +
-                ", diaAniversario=" + diaAniversario +
-                ", mesAniversario=" + mesAniversario +
-                '}';
+        return "Contato de nome " + nome +
+                ", que aniversaria em " + diaAniversario +
+                "/" + mesAniversario;
+
     }
 }
